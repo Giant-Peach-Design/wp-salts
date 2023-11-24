@@ -1,26 +1,32 @@
 {
-  "name"        : "salaros/wp-salts",
-  "description" : "Generate salts for your WordPress installation",
-  "type"        : "library",
-  "homepage"    : "https://github.com/salaros/wp-salts",
-  "license"     : "MIT",
-  "require" : {
-    "php"                   : ">=5.4",
-    "ircmaxell/random-lib"  : "^1.2.0"
+  "name": "giantpeach/wp-salts",
+  "description": "Generate salts for your WordPress installation",
+  "type": "library",
+  "homepage": "https://github.com/Giant-Peach-Design/wp-salts",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.4",
+    "ircmaxell/random-lib": "^1.2.0"
   },
-  "minimum-stability"       : "dev",
-  "prefer-stable"           : true,
-  "authors"    : [
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "authors": [
     {
-      "name"    : "Zhmayev Yaroslav",
-      "email"   : "salaros@salaros.com",
+      "name": "Zhmayev Yaroslav",
+      "email": "salaros@salaros.com",
       "homepage": "https://salaros.com",
-      "role"    : "Developer"
+      "role": "Developer"
+    },
+    {
+      "name": "Giant Peach",
+      "email": "dev@giantpeach.agency",
+      "homepage": "https://giantpeach.agency",
+      "role": "Developer"
     }
   ],
-  "autoload" : {
-    "psr-4" : {
-      "Salaros\\WordPress\\" : "src/"
+  "autoload": {
+    "psr-4": {
+      "Salaros\\WordPress\\": "src/"
     }
   }
 }
