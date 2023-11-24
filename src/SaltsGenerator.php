@@ -10,10 +10,10 @@ class SaltsGenerator
     const ALL_CHARACTERS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_ []{}<>~`+=,.;:/?|!@#$%^&*()';
 
     /**
-    * Salts that need to be generated
-    *
-    * @var array
-    */
+     * Salts that need to be generated
+     *
+     * @var array
+     */
     const DEFAULT_SALT_SPECS = [
         'AUTH_KEY',
         'SECURE_AUTH_KEY',
@@ -29,7 +29,7 @@ class SaltsGenerator
     {
         $outputFormat = $outputFormat ?: self::guessFileFormat($fileName);
         $formatted = self::generateFormattedSalts($outputFormat, $additionalSalts);
-        $fileFlags = $fileFlags ?: (file_exists($fileName)) ? FILE_APPEND : 0;
+        $fileFlags = ($fileFlags ?: (file_exists($fileName))) ? FILE_APPEND : 0;
         try {
             return file_put_contents($fileName, $formatted, $fileFlags);
         } catch (\Exception $ex) {
@@ -39,7 +39,7 @@ class SaltsGenerator
 
     public static function formatSalts($outputFormat, array $salts)
     {
-        if (! is_assoc_array($salts)) {
+        if (!is_assoc_array($salts)) {
             throw new \InvalidArgumentException(
                 "Salts must be an associative array, e.g [ 'MY_SALT' => '3D.c=X7W}CCKB^' ]"
             );
@@ -80,7 +80,7 @@ class SaltsGenerator
     public static function generateSalts(array $additionalSalts = null)
     {
         $additionalSalts = $additionalSalts ?: [];
-        $additionalSalts = (! is_assoc_array($additionalSalts))
+        $additionalSalts = (!is_assoc_array($additionalSalts))
             ? array_fill_keys($additionalSalts, '0')
             : $additionalSalts;
         $saltSpecs = array_merge(
@@ -96,7 +96,7 @@ class SaltsGenerator
                 continue;
             }
             $saltLength = intval($saltLength) ?: 64;
-            $salts[ $key ] = $generator->generateString($saltLength, self::ALL_CHARACTERS);
+            $salts[$key] = $generator->generateString($saltLength, self::ALL_CHARACTERS);
         }
         return $salts;
     }
