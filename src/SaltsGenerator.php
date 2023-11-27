@@ -34,7 +34,7 @@ class SaltsGenerator
 
     public static function updateSaltsForProject()
     {
-        $salts = self::generateFormattedSalts('env');
+        $salts = self::generateSalts();
         $file = file('.env');
 
         if ($file) {
@@ -43,7 +43,7 @@ class SaltsGenerator
                 $line = explode('=', $line);
                 $key = $line[0];
                 $value = $line[1];
-                if (isset($salts[$key])) {
+                if (array_key_exists($key, $salts)) {
                     $value = $salts[$key];
                 }
                 return $key . '=' . $value;
