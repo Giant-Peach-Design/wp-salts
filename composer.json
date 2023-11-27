@@ -26,7 +26,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Giantpeach\\Schnapps\\Salts": "src/"
+      "Giantpeach\\Schnapps\\Salts\\": "src/"
     }
   }
 }
