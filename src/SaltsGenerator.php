@@ -32,6 +32,14 @@ class SaltsGenerator
         return $salts;
     }
 
+    public static function updateSaltsForProject()
+    {
+        $salts = self::generateFormattedSalts('env');
+        $file = file('.env');
+        var_dump($file);
+        var_dump($salts);
+    }
+
     public static function writeToFile($outputFormat, $fileName, array $additionalSalts = null, $fileFlags = 0)
     {
         $outputFormat = $outputFormat ?: self::guessFileFormat($fileName);
