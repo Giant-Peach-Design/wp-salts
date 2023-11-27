@@ -36,8 +36,22 @@ class SaltsGenerator
     {
         $salts = self::generateFormattedSalts('env');
         $file = file('.env');
-        var_dump($file);
-        var_dump($salts);
+
+        if ($file) {
+            $file = array_map(function ($line) use ($salts) {
+                $line = trim($line);
+                $line = explode('=', $line);
+                $key = $line[0];
+                $value = $line[1];
+                if (isset($salts[$key])) {
+                    $value = $salts[$key];
+                }
+                return $key . '=' . $value;
+            }, $file);
+            $file = implode(PHP_EOL, $file);
+
+            file_put_contents('.env', $file);
+        }
     }
 
     public static function writeToFile($outputFormat, $fileName, array $additionalSalts = null, $fileFlags = 0)
