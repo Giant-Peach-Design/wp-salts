@@ -7,7 +7,7 @@ use RandomLib\Factory;
 
 class SaltsGenerator
 {
-    const ALL_CHARACTERS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_ []{}<>~`+=,.;:/?|!@#$%^&*()';
+    const ALL_CHARACTERS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_ []{}<>~`+,.;:/?|!@#$%^&*()';
 
     /**
      * Salts that need to be generated
@@ -37,19 +37,22 @@ class SaltsGenerator
         $salts = self::generateSalts();
         $file = file('.env');
 
-        var_dump($salts);
-        var_dump($file);
 
         if ($file) {
             $file = array_map(function ($line) use ($salts) {
                 $line = trim($line);
                 $line = explode('=', $line);
-                $key = $line[0];
-                $value = $line[1];
-                if (array_key_exists($key, $salts)) {
-                    $value = $salts[$key];
+
+                if (count($line) === 2 && array_key_exists($line[0], $salts)) {
+                    $line[1] = $salts[$line[0]];
+                    // wrap in quotes if it's not already
+                    if (substr($line[1], 0, 1) !== "'" && substr($line[1], -1) !== "'") {
+                        $line[1] = "'" . $line[1] . "'";
+                    }
+                    return implode('=', $line);
+                } else {
+                    return implode('=', $line);
                 }
-                return $key . '=' . $value;
             }, $file);
             $file = implode(PHP_EOL, $file);
 
