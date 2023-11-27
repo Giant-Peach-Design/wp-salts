@@ -37,6 +37,9 @@ class SaltsGenerator
         $salts = self::generateSalts();
         $file = file('.env');
 
+        var_dump($salts);
+        var_dump($file);
+
         if ($file) {
             $file = array_map(function ($line) use ($salts) {
                 $line = trim($line);
