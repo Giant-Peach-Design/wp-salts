@@ -1,6 +1,6 @@
 <?php
 
-namespace Salaros\WordPress;
+namespace Giantpeach\Schanpps\Salts;
 
 use SecurityLib\Strength;
 use RandomLib\Factory;
@@ -24,6 +24,13 @@ class SaltsGenerator
         'LOGGED_IN_SALT',
         'NONCE_SALT',
     ];
+
+    public static function generateSaltsForProject()
+    {
+
+        $salts = self::writeToFile('env', 'test.env');
+        return $salts;
+    }
 
     public static function writeToFile($outputFormat, $fileName, array $additionalSalts = null, $fileFlags = 0)
     {
