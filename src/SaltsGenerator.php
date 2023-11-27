@@ -28,7 +28,7 @@ class SaltsGenerator
     public static function generateSaltsForProject()
     {
 
-        $salts = self::writeToFile('env', 'test.env');
+        $salts = self::writeToFile('env', '.env');
         return $salts;
     }
 
