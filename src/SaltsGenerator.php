@@ -1,6 +1,6 @@
 <?php
 
-namespace Giantpeach\Schanpps\Salts;
+namespace Giantpeach\Schnapps\Salts;
 
 use SecurityLib\Strength;
 use RandomLib\Factory;
